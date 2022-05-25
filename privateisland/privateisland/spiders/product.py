@@ -23,12 +23,12 @@ class ProductSpider(scrapy.Spider):
         UPC = response.xpath('//dd[@class="productView-info-value productView-info-value--upc"]/text()').get()
         Price = response.xpath('//*[@id="topOfPage"]/div[6]/div[1]/div/main/div[1]/div[1]/div[1]/div[1]/section[3]/div[1]/div[1]/div[2]/span[3]/text()').get()
         SKU = response.xpath('//dd[@class="productView-info-value productView-info-value--sku"]/text()').get()
+        Image_URL = response.xpath('//img[contains(@alt,"{}")]/@src'.format(Title[:10])).getall()
+        print("______________===================_______________________")
         yield {
             'Title':Title,
             'UPC':UPC,
             'Price':Price,
             'SKU':SKU,
+            'Image_URL':Image_URL,
         }
-        # TODOS
-        """test all the things are ok for every products and scrape image link"""
-        # Image_URL = response.xpath('//h1[@class="productView-title"]/text()').get()
